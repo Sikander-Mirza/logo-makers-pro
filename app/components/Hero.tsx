@@ -18,7 +18,7 @@ export default function Hero() {
             LOGO DESIGN COMPANY
           </h2>
           <span className="h-[2px] w-14 bg-black"></span>
-        </div>
+        </div> 
 
         {/* ROW 1: LOGO */}
         <h1 className="font-black uppercase leading-[0.9] tracking-tight text-black text-[70px] md:text-[120px] lg:text-[150px]">

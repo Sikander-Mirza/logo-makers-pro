@@ -3,7 +3,7 @@ import { Archivo_Black, Inter } from "next/font/google";
 import "./globals.css";
 import Cursor from "./components/Cursor";
 import Navbar from "./components/Navbar";
-
+import Footer from "./components/footer";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -31,6 +31,8 @@ export default function RootLayout({
         <Cursor />
         <Navbar />
         {children}
+              <Footer/>
+
       </body>
     </html>
   );
