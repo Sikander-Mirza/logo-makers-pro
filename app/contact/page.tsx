@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import Image from "next/image";
-import Link from "next/link";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
+    email: "",
     phone: "",
+    subject: "",
     message: "",
     consent: false,
   });
@@ -27,220 +27,257 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.message || !form.consent) return;
+    if (!form.name || !form.email || !form.subject || !form.message || !form.consent)
+      return;
 
     setSubmitting(true);
-    // TODO: wire to your API / email service
     await new Promise((r) => setTimeout(r, 900));
     setSubmitting(false);
     setSent(true);
-    setForm({ name: "", phone: "", message: "", consent: false });
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+      consent: false,
+    });
   };
 
-  return (
-    <main className="bg-white text-black">
-      {/* TOP HERO STRIP */}
-      <section className="border-b border-zinc-100 pt-16 pb-10 md:pt-24 md:pb-14">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-end gap-10 px-6 lg:grid-cols-12 lg:px-12">
-          {/* Big heading */}
-          <div className="lg:col-span-7">
-            <h1 className="text-5xl font-black leading-[0.95] tracking-tight text-black sm:text-6xl md:text-7xl lg:text-[88px]">
-              Let&apos;s get in
-              <br />
-              touch
-            </h1>
-          </div>
+  const fieldClass =
+    "w-full border-0 border-b border-zinc-300 bg-transparent px-0 pb-3 pt-2 text-[15px] text-black outline-none transition-colors focus:border-black";
 
-          {/* Intro copy */}
-          <div className="lg:col-span-5 lg:pb-3">
-            <p className="max-w-sm text-[15px] leading-[1.75] text-zinc-500 md:ml-auto md:text-right">
-              begin something extraordinary together.
-              <br />
-              Feel free to reach out to us for any
-              <br />
-              inquiries or to start a special project.
-            </p>
-          </div>
+  return (
+    <main className="min-h-screen bg-white text-black">
+      {/* ========== TOP: Title + Intro ========== */}
+      <section className="pt-8 md:pt-12">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-10 px-6 md:flex-row md:items-start md:justify-between lg:px-16 xl:px-20">
+          {/* Giant heading — left */}
+          <h1 className="max-w-[720px] text-[52px] font-black leading-[0.92] tracking-tight text-black sm:text-[68px] md:text-[80px] lg:text-[96px]">
+            Let&apos;s get in
+            <br />
+            touch
+          </h1>
+
+          {/* Intro — top right */}
+          <p className="max-w-[300px] shrink-0 pt-2 text-[14px] leading-[1.7] text-zinc-500 md:pt-4 md:text-[15px]">
+            We&apos;re excited to connect with you and begin something
+            extraordinary together. Feel free to reach out to us for any
+            inquiries or to start a special project.
+          </p>
         </div>
       </section>
 
-      {/* MAIN CONTACT GRID */}
-      <section className="py-16 md:py-24">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 lg:grid-cols-12 lg:gap-10 lg:px-12">
+      {/* Spacer matching the large empty area in the design */}
+      <div className="h-16 md:h-24 lg:h-32" />
+
+      {/* ========== BOTTOM: Info + Form ========== */}
+      <section className="pb-28">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-16 px-6 lg:grid-cols-12 lg:gap-8 lg:px-16 xl:px-20">
           
-          {/* LEFT — Contact info */}
-          <div className="lg:col-span-4">
-            <h2 className="mb-8 text-2xl font-bold leading-tight tracking-tight text-black md:text-3xl">
+          {/* LEFT — Contact details */}
+          <div className="lg:col-span-4 xl:col-span-4">
+            <h2 className="mb-8 text-[26px] font-bold leading-[1.2] tracking-tight text-black md:text-[30px]">
               Have a Question?
               <br />
               Say Hello!
             </h2>
 
-            <ul className="space-y-5 text-[15px] text-zinc-700">
-              <li className="flex items-start gap-3">
-                <span className="mt-0.5 text-lg" aria-hidden>
-                  ☎
-                </span>
+            <ul className="space-y-5">
+              {/* Phone */}
+              <li className="flex items-center gap-3">
+                <svg
+                  className="h-[18px] w-[18px] shrink-0 text-zinc-700"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
                 <a
                   href="tel:+13072183240"
-                  className="underline decoration-zinc-300 underline-offset-4 transition-colors hover:text-black hover:decoration-black"
+                  className="text-[14px] text-zinc-800 underline decoration-zinc-400 underline-offset-[5px] transition-colors hover:text-black hover:decoration-black"
                 >
                   (307) 218-3240
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-0.5 text-lg" aria-hidden>
-                  ✉
-                </span>
+
+              {/* Email */}
+              <li className="flex items-center gap-3">
+                <svg
+                  className="h-[18px] w-[18px] shrink-0 text-zinc-700"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
                 <a
                   href="mailto:support@logomakerspro.com"
-                  className="underline decoration-zinc-300 underline-offset-4 transition-colors hover:text-black hover:decoration-black"
+                  className="text-[14px] text-zinc-800 underline decoration-zinc-400 underline-offset-[5px] transition-colors hover:text-black hover:decoration-black"
                 >
                   support@logomakerspro.com
                 </a>
               </li>
+
+              {/* Address */}
               <li className="flex items-start gap-3">
-                <span className="mt-0.5 text-lg" aria-hidden>
-                  📍
-                </span>
-                <span className="leading-relaxed">
+                <svg
+                  className="mt-0.5 h-[18px] w-[18px] shrink-0 text-zinc-700"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span className="text-[14px] leading-relaxed text-zinc-800">
                   1309 Coffeen Ave. STE 1200, Sheridan, WY 82801
                 </span>
               </li>
             </ul>
           </div>
 
-          {/* CENTER — Form */}
-          <div className="lg:col-span-4">
-            <form onSubmit={handleSubmit} className="space-y-10">
-              {/* Name */}
-              <div className="relative">
-                <label
-                  htmlFor="name"
-                  className="mb-2 block text-sm font-semibold text-black"
-                >
-                  Name <span className="text-black">*</span>
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  value={form.name}
-                  onChange={handleChange}
-                  className="w-full border-0 border-b border-zinc-300 bg-transparent px-0 py-3 text-[15px] text-black outline-none transition-colors placeholder:text-zinc-400 focus:border-black"
-                  placeholder=""
-                />
+          {/* RIGHT — Form */}
+          <div className="lg:col-span-8 xl:col-span-8">
+            <form onSubmit={handleSubmit} className="w-full">
+              {/* Name | Email */}
+              <div className="mb-12 grid grid-cols-1 gap-x-16 gap-y-12 md:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="mb-2 block text-[13px] font-semibold text-black"
+                  >
+                    Name <span>*</span>
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={handleChange}
+                    className={fieldClass}
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-[13px] font-semibold text-black"
+                  >
+                    Email <span>*</span>
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={handleChange}
+                    className={fieldClass}
+                  />
+                </div>
               </div>
 
-              {/* Phone */}
-              <div className="relative">
-                <label
-                  htmlFor="phone"
-                  className="mb-2 block text-sm font-semibold text-black"
-                >
-                  Phone
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={form.phone}
-                  onChange={handleChange}
-                  className="w-full border-0 border-b border-zinc-300 bg-transparent px-0 py-3 text-[15px] text-black outline-none transition-colors placeholder:text-zinc-400 focus:border-black"
-                  placeholder=""
-                />
+              {/* Phone | Subject */}
+              <div className="mb-12 grid grid-cols-1 gap-x-16 gap-y-12 md:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="mb-2 block text-[13px] font-semibold text-black"
+                  >
+                    Phone
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={form.phone}
+                    onChange={handleChange}
+                    className={fieldClass}
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="mb-2 block text-[13px] font-semibold text-black"
+                  >
+                    Subject <span>*</span>
+                  </label>
+                  <input
+                    id="subject"
+                    name="subject"
+                    type="text"
+                    required
+                    value={form.subject}
+                    onChange={handleChange}
+                    className={fieldClass}
+                  />
+                </div>
               </div>
 
-              {/* Message */}
-              <div className="relative">
+              {/* Messages — full width */}
+              <div className="mb-10">
                 <label
                   htmlFor="message"
-                  className="mb-2 block text-sm font-semibold text-black"
+                  className="mb-2 block text-[13px] font-semibold text-black"
                 >
-                  Messages <span className="text-black">*</span>
+                  Messages <span>*</span>
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   required
-                  rows={3}
+                  rows={2}
                   value={form.message}
                   onChange={handleChange}
-                  className="w-full resize-none border-0 border-b border-zinc-300 bg-transparent px-0 py-3 text-[15px] text-black outline-none transition-colors placeholder:text-zinc-400 focus:border-black"
-                  placeholder=""
+                  className={`${fieldClass} resize-none`}
                 />
               </div>
 
               {/* Consent */}
-              <label className="flex cursor-pointer items-start gap-3">
+              <label className="mb-10 flex max-w-2xl cursor-pointer items-start gap-3">
                 <input
                   type="checkbox"
                   name="consent"
                   checked={form.consent}
                   onChange={handleChange}
                   required
-                  className="mt-1 h-4 w-4 shrink-0 rounded border-zinc-400 text-black accent-black"
+                  className="mt-1 h-4 w-4 shrink-0 border border-zinc-400 accent-black"
                 />
                 <span className="text-[12px] leading-[1.65] text-zinc-500">
                   By providing a telephone number and submitting this form, you
                   are consenting to be contacted by SMS text message. Message
-                  &amp; data rates may apply. You can reply STOP to
-                  unsubscribe at any time.
+                  &amp; data rates may apply. You can reply STOP to unsubscribe
+                  at any time.
                 </span>
               </label>
 
-              {/* Submit */}
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="rounded-full bg-black px-10 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-all hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {submitting ? "Sending..." : sent ? "Message Sent ✓" : "Send Message"}
-                </button>
-              </div>
-            </form>
-          </div>
-
-          {/* RIGHT — Media card */}
-          <div className="lg:col-span-4">
-            <div className="relative ml-auto aspect-[4/3] w-full max-w-md overflow-hidden rounded-2xl bg-zinc-900 shadow-2xl lg:max-w-none">
-              {/* Replace with your image or video */}
-              <Image
-                src="/contact-office.webp"
-                alt="Our studio"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 35vw"
-                priority
-              />
-
-              {/* Optional: use a video instead
-              <video
-                className="h-full w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster="/contact-office.webp"
+              <button
+                type="submit"
+                disabled={submitting}
+                className="rounded-full bg-black px-10 py-3.5 text-xs font-bold uppercase tracking-[0.18em] text-white transition-all hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                <source src="/contact-office.mp4" type="video/mp4" />
-              </video>
-              */}
-            </div>
+                {submitting
+                  ? "Sending..."
+                  : sent
+                    ? "Message Sent ✓"
+                    : "Send Message"}
+              </button>
+            </form>
           </div>
         </div>
       </section>
-
-      {/* Back to top (optional — remove if global footer already has one) */}
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        aria-label="Back to top"
-        className="fixed bottom-8 left-8 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-black text-white shadow-lg transition-transform hover:scale-110"
-      >
-        <span className="text-sm">↑</span>
-      </button>
     </main>
   );
 }
