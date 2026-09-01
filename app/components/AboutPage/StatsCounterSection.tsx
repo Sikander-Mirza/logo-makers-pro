@@ -10,7 +10,7 @@ interface StatItem {
 
 const stats: StatItem[] = [
   { value: 1000, suffix: "+", label: "Logo\nDesigns" },
-  { value: 200, suffix: "+", label: "Websites\nDesigns" },
+  { value: 150, suffix: "+", label: "Websites\nDesigns" },
   { value: 100, suffix: "+", label: "Mobile\nApps" },
   { value: 150, suffix: "+", label: "Ecommerce\nWebsites" },
 ];
