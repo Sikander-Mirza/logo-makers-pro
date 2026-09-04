@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function SmoothHorizontalScroll() {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
     let ticking = false;
 

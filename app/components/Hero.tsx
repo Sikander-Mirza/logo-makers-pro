@@ -34,8 +34,8 @@ export default function Hero() {
             brand&apos;s identity and leave a lasting impression. Achieve
             excellence with our{" "}
             <strong className="font-bold text-black">
-              professional logo design services.
-            </strong>
+             professional logo design services.
+            </strong> 
           </p>
 
           {/* MAKERS PRO */}

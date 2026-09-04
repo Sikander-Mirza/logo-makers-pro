@@ -83,7 +83,7 @@ export default function Footer() {
               {text.split("").map((char, index) => (
                 <span
                   key={index}
-                  style={{ animationDelay: `${index * 0.12}s` }}
+                  style={{ animationDelay: `${index * 0.12}s`}}
                   className="animate-spring-jump inline-block text-zinc-100 hover:text-white"
                 >
                   {char === " " ? "\u00A0" : char}

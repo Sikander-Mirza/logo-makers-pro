@@ -65,8 +65,7 @@ export default function PricingPackages() {
         "100% Satisfaction Guarantee",
         "Complete Brand Guidelines",
       ],
-    },
-    
+    }, 
   ];
 
   return (

@@ -34,7 +34,7 @@ export default function WhoWeAre() {
             {/* 1. SUB-HEADING (Aligned to the right of the vertical line) */}
             <div className="pl-5 md:pl-5 lg:pl-3 ">
               <span className="text-xs md:text-sm font-bold tracking-[0.25em] text-white uppercase">
-                WHO WE ARE
+                WHO ARE WE
               </span>
             </div>
 
